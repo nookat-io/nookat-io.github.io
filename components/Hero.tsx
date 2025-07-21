@@ -1,10 +1,52 @@
-import React from "react"
+"use client"
+
+import React, { useState, useEffect } from "react"
 import { Download, Terminal, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { BackgroundEffects } from "./BackgroundEffects"
 
 export function Hero() {
+  const [userOS, setUserOS] = useState<string>("")
+  const [otherOS, setOtherOS] = useState<string>("")
+
+  useEffect(() => {
+    // Detect user's operating system
+    const detectOS = () => {
+      const userAgent = navigator.userAgent.toLowerCase()
+      
+      if (userAgent.includes('mac')) {
+        setUserOS("macOS")
+        setOtherOS("Other Systems")
+      } else if (userAgent.includes('win')) {
+        setUserOS("Other Systems")
+        setOtherOS("macOS")
+      } else if (userAgent.includes('linux')) {
+        setUserOS("Linux")
+        setOtherOS("macOS")
+      } else {
+        // Default fallback
+        setUserOS("Other Systems")
+        setOtherOS("macOS")
+      }
+    }
+
+    detectOS()
+  }, [])
+
+  const getDownloadUrl = (os: string) => {
+    switch (os.toLowerCase()) {
+      case 'macos':
+        return '#macos-download'
+      case 'windows':
+        return '#windows-download'
+      case 'linux':
+        return '#linux-download'
+      default:
+        return '#download'
+    }
+  }
+
   return (
     <section className="relative py-20 px-4 overflow-hidden">
       <BackgroundEffects />
@@ -25,17 +67,22 @@ export function Hero() {
 
         {/* Installation Options */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <Button size="lg" className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 shadow-lg shadow-blue-500/25 transition-all duration-300 hover:scale-105">
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 shadow-lg shadow-blue-500/25 transition-all duration-300 hover:scale-105"
+            onClick={() => window.open(getDownloadUrl(userOS), '_blank')}
+          >
             <Download className="w-5 h-5 mr-2" />
-            Download for macOS
+            Download for {userOS}
           </Button>
           <Button
             size="lg"
             variant="outline"
             className="border-slate-600 text-slate-300 hover:bg-slate-700/50 px-8 bg-slate-800/50 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-blue-500/50"
+            onClick={() => window.open(getDownloadUrl(otherOS), '_blank')}
           >
             <Download className="w-5 h-5 mr-2" />
-            Download for Windows
+            Download for {otherOS}
           </Button>
         </div>
 
@@ -53,9 +100,9 @@ export function Hero() {
               type="button"
               title="Copy install command"
               className="p-2 rounded hover:bg-slate-700/50 transition-all duration-200 text-slate-400 hover:text-white hover:scale-110"
-              // onClick={() => {
-              //   navigator.clipboard.writeText("curl -fsSL https://get.nookat.io | sh")
-              // }}
+              onClick={() => {
+                navigator.clipboard.writeText("curl -fsSL https://get.nookat.io | sh")
+              }}
             >
               <Copy className="w-4 h-4" />
             </button>
