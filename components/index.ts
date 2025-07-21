@@ -1,0 +1,6 @@
+export { Header } from "./Header"
+export { Hero } from "./Hero"
+export { Features } from "./Features"
+export { WhyNookat } from "./WhyNookat"
+export { DownloadSection } from "./Download"
+export { Footer } from "./Footer" 
