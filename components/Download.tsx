@@ -53,7 +53,7 @@ export function DownloadSection() {
           <h3 className="font-semibold mb-3 text-white">Command Line Installation</h3>
           <div className="bg-slate-900 rounded p-3 font-mono text-sm text-left">
             <div className="text-slate-400 mb-1"># Install via curl</div>
-            <div className="text-green-400">curl -fsSL https://get.nookat.dev | sh</div>
+            <div className="text-green-400">curl -fsSL https://get.nookat.io | sh</div>
             <div className="text-slate-400 mt-2 mb-1"># Or via Homebrew (macOS)</div>
             <div className="text-green-400">brew install nookat</div>
           </div>

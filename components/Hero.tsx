@@ -52,7 +52,7 @@ export function Hero() {
       <BackgroundEffects />
 
       <div className="container mx-auto text-center max-w-4xl relative z-10">
-        <Badge className="mb-6 bg-blue-500/20 text-blue-400 border-blue-500/30 backdrop-blur-sm">
+        <Badge className="mb-6 bg-blue-500/20 text-blue-400 border-blue-500/30 backdrop-blur-sm px-8 py-2">
           Free Docker Desktop Alternative
         </Badge>
         <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-slate-300 bg-clip-text text-transparent drop-shadow-lg">
