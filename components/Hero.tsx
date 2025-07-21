@@ -61,7 +61,7 @@ export function Hero() {
           Made Simple
         </h1>
         <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed backdrop-blur-sm">
-          Nookat is a lightweight, native Docker container management tool that provides all the essential features
+          Nookat is a lightweight Docker container management tool that provides all the essential features
           you need without the bloat. Fast, intuitive, and completely free.
         </p>
 
