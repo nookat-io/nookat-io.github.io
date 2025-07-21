@@ -2,10 +2,12 @@ import React from "react"
 import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { BackgroundEffects } from "./BackgroundEffects"
 
 export function DownloadSection() {
   return (
-    <section id="download" className="py-20 px-4 bg-slate-800/30">
+    <section id="download" className="py-20 px-4 bg-slate-800/30 relative">
+      <BackgroundEffects />
       <div className="container mx-auto max-w-4xl text-center">
         <h2 className="text-3xl font-bold mb-4">Get Started Today</h2>
         <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
