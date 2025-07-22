@@ -5,6 +5,7 @@ import { Download, Terminal, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { BackgroundEffects } from "./BackgroundEffects"
+import { GridEffect } from "./GridEffect"
 
 export function Hero() {
   const [userOS, setUserOS] = useState<string>("")
@@ -50,6 +51,8 @@ export function Hero() {
   return (
     <section className="relative py-20 px-4 overflow-hidden">
       <BackgroundEffects />
+
+      <GridEffect />
 
       <div className="container mx-auto text-center max-w-4xl relative z-10">
         <Badge className="mb-6 bg-blue-500/20 text-blue-400 border-blue-500/30 backdrop-blur-sm px-8 py-2">
