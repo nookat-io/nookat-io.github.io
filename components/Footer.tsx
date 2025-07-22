@@ -1,5 +1,7 @@
 import React from "react"
-import { Container, Github } from "lucide-react"
+import { Github } from "lucide-react"
+import { Button } from "./ui/button"
+import Link from "next/link"
 
 export function Footer() {
   return (
@@ -7,8 +9,8 @@ export function Footer() {
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-3 mb-4 md:mb-0">
-            <div className="w-6 h-6 bg-blue-500 rounded flex items-center justify-center">
-              <Container className="w-4 h-4" />
+            <div className="w-6 h-6 rounded flex items-center justify-center">
+              <img src="./logo.png" alt="Nookat Logo" className="w-6 h-6" />
             </div>
             <span className="font-semibold">Nookat</span>
           </div>
@@ -18,11 +20,16 @@ export function Footer() {
             <span className="text-xs">Docker is a registered trademark of Docker, Inc. Nookat is not affiliated with Docker, Inc. in any way.</span>
           </div>
           <div className="flex items-center gap-6 text-slate-400">
-            <a href="https://github.com/nookat-io/nookat" className="hover:text-white transition-colors border border-slate-700 rounded-md p-2">
-              <div className="flex items-center gap-2">
-                <Github className="w-4 h-4" /> GitHub
-              </div>
-            </a>
+            <Link href="https://github.com/nookat-io/nookat">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent"
+              >
+                <Github className="w-4 h-4 mr-2" />
+                GitHub
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

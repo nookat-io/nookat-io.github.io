@@ -1,6 +1,7 @@
 import React from "react"
 import { Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export function Header() {
   return (
@@ -17,14 +18,16 @@ export function Header() {
           <a href="#download" className="text-slate-300 hover:text-white transition-colors">
             Download
           </a>
-          <Button
-            variant="outline"
-            size="sm"
-            className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent"
-          >
-            <Github className="w-4 h-4 mr-2" />
-            GitHub
-          </Button>
+          <Link href="https://github.com/nookat-io/nookat">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent"
+            >
+              <Github className="w-4 h-4 mr-2" />
+              GitHub
+            </Button>
+          </Link>
         </nav>
       </div>
     </header>

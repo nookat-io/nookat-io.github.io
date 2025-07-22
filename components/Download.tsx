@@ -2,13 +2,11 @@ import React from "react"
 import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { GridEffect } from "./GridEffect"
+import Link from "next/link"
 
 export function DownloadSection() {
   return (
     <section id="download" className="py-20 px-4 bg-slate-800/30 relative">
-      <GridEffect />
-
       <div className="container mx-auto max-w-4xl text-center">
         <h2 className="text-3xl font-bold mb-4">Get Started Today</h2>
         <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
@@ -19,9 +17,11 @@ export function DownloadSection() {
           <Card className="bg-slate-800 border-slate-700">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-4 text-white">macOS</h3>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 mb-2">
-                <Download className="w-4 h-4 mr-2" />
-                Download .dmg
+              <Button asChild className="w-full bg-blue-600 hover:bg-blue-700 mb-2">
+                <Link href="https://github.com/nookat-io/nookat/releases/download/v0.1.0/Nookat-0.1.0-arm64.dmg">
+                  <Download className="w-4 h-4 mr-2" />
+                  Download .dmg
+                </Link>
               </Button>
               <p className="text-xs text-slate-400">macOS 10.15 or later</p>
             </CardContent>
@@ -41,9 +41,11 @@ export function DownloadSection() {
           <Card className="bg-slate-800 border-slate-700">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-4 text-white">Linux</h3>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 mb-2">
-                <Download className="w-4 h-4 mr-2" />
-                Download .AppImage
+              <Button asChild className="w-full bg-blue-600 hover:bg-blue-700 mb-2">
+                <Link href="https://github.com/nookat-io/nookat/releases/download/v0.1.0/Nookat-0.1.0-arm64.AppImage">
+                  <Download className="w-4 h-4 mr-2" />
+                  Download .AppImage
+                </Link>
               </Button>
               <p className="text-xs text-slate-400">Most distributions</p>
             </CardContent>
