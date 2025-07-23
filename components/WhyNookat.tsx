@@ -49,7 +49,7 @@ export function WhyNookat() {
           </div>
           <div className="bg-slate-800 rounded-lg p-1 border border-slate-700">
             <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-07-21%20at%2013.45.15-iDASv17GCk76AHhLujt27PyDJp8TkK.png"
+              src="./screenshot-dark.png"
               alt="Nookat application interface showing container management"
               className="w-full rounded-lg"
             />
