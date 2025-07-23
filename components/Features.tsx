@@ -1,11 +1,10 @@
-import React from "react"
 import { Container, HardDrive, Network, Settings } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 export function Features() {
   return (
-    <section id="features" className="py-20 px-4 bg-white dark:bg-slate-800/30">
-      <div className="container mx-auto max-w-6xl">
+    <section id="features" className="section-padding bg-white dark:bg-slate-800/30">
+      <div className="container-base max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">Everything You Need</h2>
           <p className="text-slate-700 dark:text-slate-300 text-lg max-w-2xl mx-auto">
@@ -14,7 +13,7 @@ export function Features() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 hover:border-blue-500/50 transition-colors">
+          <Card className="card-base">
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Container className="w-6 h-6 text-blue-400" />
@@ -26,7 +25,7 @@ export function Features() {
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 hover:border-blue-500/50 transition-colors">
+          <Card className="card-base">
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <HardDrive className="w-6 h-6 text-green-400" />
@@ -38,7 +37,7 @@ export function Features() {
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 hover:border-blue-500/50 transition-colors">
+          <Card className="card-base">
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Network className="w-6 h-6 text-purple-400" />
@@ -50,7 +49,7 @@ export function Features() {
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 hover:border-blue-500/50 transition-colors">
+          <Card className="card-base">
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Settings className="w-6 h-6 text-orange-400" />

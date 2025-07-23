@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { CheckCircle } from "lucide-react"
 import { useTheme } from "./ThemeProvider"
 
@@ -28,8 +28,8 @@ export function WhyNookat() {
   }, [theme, mounted])
   
   return (
-    <section className="py-20 px-4 bg-slate-50 dark:bg-slate-900">
-      <div className="container mx-auto max-w-4xl">
+    <section className="section-padding bg-slate-50 dark:bg-slate-900">
+      <div className="container-base max-w-4xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">Why Choose Nookat?</h2>

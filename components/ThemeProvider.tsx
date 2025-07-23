@@ -16,14 +16,11 @@ type ThemeProviderState = {
   mounted: boolean
 }
 
-// Create a default state that's safe to use
-const defaultState: ThemeProviderState = {
+const ThemeProviderContext = createContext<ThemeProviderState>({
   theme: "system",
   setTheme: () => {},
   mounted: false,
-}
-
-const ThemeProviderContext = createContext<ThemeProviderState>(defaultState)
+})
 
 export function ThemeProvider({
   children,
@@ -33,7 +30,6 @@ export function ThemeProvider({
   const [theme, setTheme] = useState<Theme>(defaultTheme)
   const [mounted, setMounted] = useState(false)
 
-  // Initialize theme from localStorage on mount
   useEffect(() => {
     setMounted(true)
     try {
@@ -46,7 +42,6 @@ export function ThemeProvider({
     }
   }, [storageKey])
 
-  // Apply theme to document
   useEffect(() => {
     if (!mounted) return
 
@@ -63,7 +58,6 @@ export function ThemeProvider({
     }
   }, [theme, mounted])
 
-  // Listen for system theme changes when using system theme
   useEffect(() => {
     if (!mounted || theme !== "system") return
 
@@ -90,14 +84,12 @@ export function ThemeProvider({
     }
   }
 
-  const value: ThemeProviderState = {
-    theme,
-    setTheme: handleSetTheme,
-    mounted,
-  }
-
   return (
-    <ThemeProviderContext.Provider value={value}>
+    <ThemeProviderContext.Provider value={{
+      theme,
+      setTheme: handleSetTheme,
+      mounted,
+    }}>
       {children}
     </ThemeProviderContext.Provider>
   )
@@ -105,6 +97,8 @@ export function ThemeProvider({
 
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext)
-  // Since we're providing a default state, this should never be undefined
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider")
+  }
   return context
 } 

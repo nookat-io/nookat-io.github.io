@@ -1,11 +1,10 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Download, Terminal, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { BackgroundEffects } from "./BackgroundEffects"
-import { GridEffect } from "./GridEffect"
 
 export function Hero() {
   const [userOS, setUserOS] = useState<string>("")
@@ -79,12 +78,10 @@ export function Hero() {
   }
 
   return (
-    <section className="relative py-20 px-4 overflow-hidden bg-slate-50 dark:bg-slate-900">
+    <section className="relative section-padding overflow-hidden bg-slate-50 dark:bg-slate-900">
       <BackgroundEffects />
 
-      <GridEffect />
-
-      <div className="container mx-auto text-center max-w-4xl relative z-10">
+      <div className="container-base text-center max-w-4xl relative z-10">
         <Badge className="mb-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white border-blue-600 shadow-lg shadow-blue-500/25 backdrop-blur-sm px-8 py-3 text-sm font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:scale-105">
           Free Docker Desktop Alternative
         </Badge>
@@ -101,14 +98,14 @@ export function Hero() {
         {/* Installation Options */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <Button 
-            className="inline-flex items-center justify-center h-12 rounded-md px-8 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:scale-105"
+            className="btn-primary"
             onClick={() => handleDownload(userOS)}
           >
             <Download className="w-5 h-5 mr-2" />
             Download for {userOS}
           </Button>
           <Button
-            className="inline-flex items-center justify-center h-12 rounded-md px-8 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 bg-white dark:bg-slate-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-blue-500/50"
+            className="btn-secondary"
             onClick={handleOtherDownload}
           >
             <Download className="w-5 h-5 mr-2" />

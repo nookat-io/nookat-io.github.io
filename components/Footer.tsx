@@ -1,7 +1,5 @@
-import React from "react"
 import { Github } from "lucide-react"
 import { Button } from "./ui/button"
-import Link from "next/link"
 
 export function Footer() {
   return (
@@ -20,14 +18,14 @@ export function Footer() {
             <span className="text-xs">Docker is a registered trademark of Docker, Inc. Nookat is not affiliated with Docker, Inc. in any way.</span>
           </div>
           <div className="flex items-center gap-6 text-slate-600 dark:text-slate-400">
-            <Link href="https://github.com/nookat-io/nookat">
+            <a href="https://github.com/nookat-io/nookat" target="_blank" rel="noopener noreferrer">
               <Button
                 className="inline-flex items-center justify-center h-9 rounded-md px-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 bg-white dark:bg-slate-800"
               >
                 <Github className="w-4 h-4 mr-2" />
                 GitHub
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

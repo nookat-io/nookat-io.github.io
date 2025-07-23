@@ -1,10 +1,8 @@
 "use client"
 
-import React from "react"
 import { Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "./ThemeToggle"
-import Link from "next/link"
 
 export function Header() {
   return (
@@ -22,14 +20,14 @@ export function Header() {
             Download
           </a>
           <ThemeToggle />
-          <Link href="https://github.com/nookat-io/nookat">
+          <a href="https://github.com/nookat-io/nookat" target="_blank" rel="noopener noreferrer">
             <Button
               className="inline-flex items-center justify-center h-9 rounded-md px-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 bg-white dark:bg-slate-800"
             >
               <Github className="w-4 h-4 mr-2" />
               GitHub
             </Button>
-          </Link>
+          </a>
         </nav>
       </div>
     </header>
