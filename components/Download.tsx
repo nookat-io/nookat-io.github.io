@@ -15,7 +15,7 @@ export function DownloadSection() {
           <Card className="card-base">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-4 text-slate-900 dark:text-white">macOS</h3>
-              <a href="https://github.com/nookat-io/nookat/releases/download/v0.1.0/Nookat-0.1.0-arm64.dmg" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/nookat-io/nookat/releases/" target="_blank" rel="noopener noreferrer">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 mb-2">
                   <Download className="w-4 h-4 mr-2" />
                   Download .dmg
@@ -28,7 +28,7 @@ export function DownloadSection() {
           <Card className="card-base">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-4 text-slate-900 dark:text-white">Windows</h3>
-              <a href="https://github.com/nookat-io/nookat/releases/latest" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/nookat-io/nookat/releases/" target="_blank" rel="noopener noreferrer">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 mb-2">
                   <Download className="w-4 h-4 mr-2" />
                   Download .exe
@@ -41,7 +41,7 @@ export function DownloadSection() {
           <Card className="card-base">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-4 text-slate-900 dark:text-white">Linux</h3>
-              <a href="https://github.com/nookat-io/nookat/releases/download/v0.1.0/Nookat-0.1.0-arm64.AppImage" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/nookat-io/nookat/releases/" target="_blank" rel="noopener noreferrer">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 mb-2">
                   <Download className="w-4 h-4 mr-2" />
                   Download .AppImage

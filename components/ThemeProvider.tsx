@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react"
 
-type Theme = "dark" | "light" | "system"
+type Theme = "dark" | "light"
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -17,14 +17,14 @@ type ThemeProviderState = {
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>({
-  theme: "system",
+  theme: "light",
   setTheme: () => {},
   mounted: false,
 })
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
   storageKey = "nookat-theme",
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme)
@@ -34,7 +34,7 @@ export function ThemeProvider({
     setMounted(true)
     try {
       const savedTheme = localStorage.getItem(storageKey) as Theme
-      if (savedTheme && ["light", "dark", "system"].includes(savedTheme)) {
+      if (savedTheme && ["light", "dark"].includes(savedTheme)) {
         setTheme(savedTheme)
       }
     } catch (error) {
@@ -47,32 +47,7 @@ export function ThemeProvider({
 
     const root = document.documentElement
     root.classList.remove("light", "dark")
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light"
-      root.classList.add(systemTheme)
-    } else {
-      root.classList.add(theme)
-    }
-  }, [theme, mounted])
-
-  useEffect(() => {
-    if (!mounted || theme !== "system") return
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-    
-    const handleChange = () => {
-      const root = document.documentElement
-      root.classList.remove("light", "dark")
-      
-      const systemTheme = mediaQuery.matches ? "dark" : "light"
-      root.classList.add(systemTheme)
-    }
-
-    mediaQuery.addEventListener("change", handleChange)
-    return () => mediaQuery.removeEventListener("change", handleChange)
+    root.classList.add(theme)
   }, [theme, mounted])
 
   const handleSetTheme = (newTheme: Theme) => {

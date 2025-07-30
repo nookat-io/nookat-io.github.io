@@ -1,10 +1,10 @@
 "use client"
 
-import { Moon, Sun, Monitor } from "lucide-react"
+import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "./ThemeProvider"
 
-type Theme = "dark" | "light" | "system"
+type Theme = "dark" | "light"
 
 export function ThemeToggle() {
   const { theme, setTheme, mounted } = useTheme()
@@ -12,13 +12,13 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <Button variant="outline" size="sm" className="w-9 h-9 p-0">
-        <Monitor className="h-4 w-4" />
+        <Sun className="h-4 w-4" />
       </Button>
     )
   }
 
   const toggleTheme = () => {
-    const themes: Theme[] = ["light", "dark", "system"]
+    const themes: Theme[] = ["light", "dark"]
     const currentIndex = themes.indexOf(theme)
     const nextIndex = (currentIndex + 1) % themes.length
     setTheme(themes[nextIndex])
@@ -30,10 +30,8 @@ export function ThemeToggle() {
         return <Sun className="h-4 w-4" />
       case "dark":
         return <Moon className="h-4 w-4" />
-      case "system":
-        return <Monitor className="h-4 w-4" />
       default:
-        return <Monitor className="h-4 w-4" />
+        return <Sun className="h-4 w-4" />
     }
   }
 
@@ -43,7 +41,7 @@ export function ThemeToggle() {
       size="sm"
       className="w-9 h-9 p-0"
       onClick={toggleTheme}
-      title={`Current theme: ${theme}. Click to cycle through themes.`}
+      title={`Current theme: ${theme}. Click to toggle theme.`}
     >
       {getIcon()}
     </Button>
