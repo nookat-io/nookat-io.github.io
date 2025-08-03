@@ -39,13 +39,13 @@ export function Hero() {
   const getDownloadUrl = (os: string) => {
     switch (os.toLowerCase()) {
       case 'macos':
-        return 'https://github.com/nookat-io/nookat/releases/download/v0.1.0/Nookat-0.1.0-arm64.dmg'
+        return 'https://github.com/nookat-io/nookat/releases/'
       case 'windows':
-        return 'https://github.com/nookat-io/nookat/releases/latest'
+        return 'https://github.com/nookat-io/nookat/releases/'
       case 'linux':
-        return 'https://github.com/nookat-io/nookat/releases/download/v0.1.0/Nookat-0.1.0-arm64.AppImage'
+        return 'https://github.com/nookat-io/nookat/releases/'
       default:
-        return 'https://github.com/nookat-io/nookat/releases/latest'
+        return 'https://github.com/nookat-io/nookat/releases/'
     }
   }
 
@@ -69,7 +69,7 @@ export function Hero() {
   const handleOtherDownload = () => {
     if (!mounted) return
     // Open GitHub releases page for all other options
-    window.open('https://github.com/nookat-io/nookat/releases/latest', '_blank')
+    window.open('https://github.com/nookat-io/nookat/releases/', '_blank')
   }
 
   const handleCopyCommand = () => {
@@ -91,7 +91,7 @@ export function Hero() {
           Made Simple
         </h1>
         <p className="text-xl text-slate-700 dark:text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed backdrop-blur-sm">
-          Nookat is a lightweight Docker container management tool that provides all the essential features
+          Nookat is a lightweight container management tool that provides all the essential features
           you need without the bloat. Fast, intuitive, and completely free.
         </p>
 
