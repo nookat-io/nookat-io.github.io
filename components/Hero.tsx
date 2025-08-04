@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Download, Terminal, Copy } from "lucide-react"
+// import { Download, Terminal, Copy } from "lucide-react"
+import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { BackgroundEffects } from "./BackgroundEffects"
@@ -72,10 +73,10 @@ export function Hero() {
     window.open('https://github.com/nookat-io/nookat/releases/', '_blank')
   }
 
-  const handleCopyCommand = () => {
-    if (!mounted) return
-    navigator.clipboard.writeText("curl -fsSL https://get.nookat.io | sh")
-  }
+  // const handleCopyCommand = () => {
+  //   if (!mounted) return
+  //   navigator.clipboard.writeText("curl -fsSL https://get.nookat.io | sh")
+  // }
 
   return (
     <section className="relative section-padding overflow-hidden bg-slate-50 dark:bg-slate-900">
@@ -114,9 +115,9 @@ export function Hero() {
         </div>
 
         {/* Terminal Installation */}
-        <div className="bg-slate-100/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-lg p-4 max-w-2xl mx-auto border border-slate-300/50 dark:border-slate-700/50 shadow-xl relative overflow-hidden">
+        {/* <div className="bg-slate-100/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-lg p-4 max-w-2xl mx-auto border border-slate-300/50 dark:border-slate-700/50 shadow-xl relative overflow-hidden"> */}
           {/* Terminal Glow Effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-purple-500/10 rounded-lg"></div>
+          {/* <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-purple-500/10 rounded-lg"></div>
           
           <div className="relative flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -131,8 +132,8 @@ export function Hero() {
             >
               <Copy className="w-4 h-4" />
             </button>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </div>
     </section>
   )

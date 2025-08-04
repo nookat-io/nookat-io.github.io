@@ -52,7 +52,7 @@ export function DownloadSection() {
           </Card>
         </div>
 
-        <div className="card-base rounded-lg p-6 max-w-2xl mx-auto">
+        {/* <div className="card-base rounded-lg p-6 max-w-2xl mx-auto">
           <h3 className="font-semibold mb-3 text-slate-900 dark:text-white">Command Line Installation</h3>
           <div className="bg-slate-100 dark:bg-slate-900 rounded p-3 font-mono text-sm text-left">
             <div className="text-slate-600 dark:text-slate-400 mb-1"># Install via curl</div>
@@ -60,7 +60,7 @@ export function DownloadSection() {
             <div className="text-slate-600 dark:text-slate-400 mt-2 mb-1"># Or via Homebrew (macOS)</div>
             <div className="text-green-600 dark:text-green-400">brew install nookat</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   )
