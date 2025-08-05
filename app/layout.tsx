@@ -7,8 +7,8 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Nookat - Free and open source Docker Desktop alternative</title>
-        <meta name="description" content="Free and open source Docker Desktop alternative" />
+        <title>Nookat is a lightweight container management tool build with Tauri, Rust and React</title>
+        <meta name="description" content="Nookat is a lightweight container management tool build with Tauri, Rust and React" />
         <link rel="icon" type="image/png" href="./favicon.png" />
       </head>
       <body>
