@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle, XCircle, Zap, Shield, Code, Users } from "lucide-react";
+import { Zap, Shield, Code, Users } from "lucide-react";
 
 export function WhyNookat() {
   return (
@@ -35,7 +35,7 @@ export function WhyNookat() {
             <div className="text-center">
               <div className="w-20 h-20 bg-orange-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 p-3">
                 <img
-                  src="/rust-logo.png"
+                  src="./rust-logo.png"
                   alt="Rust Logo"
                   className="w-20 dark:invert"
                 />
@@ -51,7 +51,7 @@ export function WhyNookat() {
             <div className="text-center">
               <div className="w-20 h-20 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 p-3">
                 <img
-                  src="/tauri-logo.svg"
+                  src="./tauri-logo.svg"
                   alt="Tauri Logo"
                   className="w-12 h-12"
                 />
@@ -67,7 +67,7 @@ export function WhyNookat() {
             <div className="text-center">
               <div className="w-20 h-20 bg-green-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 p-3">
                 <img
-                  src="/react-logo.png"
+                  src="./react-logo.png"
                   alt="React Logo"
                   className="w-12 h-12"
                 />
@@ -79,115 +79,6 @@ export function WhyNookat() {
                 Modern, responsive UI with component-based architecture.
                 Familiar and powerful web technologies.
               </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Comparison Table */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden mb-16">
-          <div className="grid md:grid-cols-3 divide-x divide-slate-200 dark:divide-slate-700">
-            {/* Header */}
-            <div className="p-8 text-center bg-slate-50 dark:bg-slate-700/50">
-              <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">
-                Feature
-              </h3>
-            </div>
-            <div className="p-8 text-center bg-red-50 dark:bg-red-900/20">
-              <h3 className="font-bold text-lg text-red-600 dark:text-red-400 mb-2">
-                Traditional Tools
-              </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
-                $7/month
-              </p>
-            </div>
-            <div className="p-8 text-center bg-green-50 dark:bg-green-900/20">
-              <h3 className="font-bold text-lg text-green-600 dark:text-green-400 mb-2">
-                Nookat
-              </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
-                Free Forever
-              </p>
-            </div>
-          </div>
-
-          {/* Comparison Rows */}
-          <div className="grid md:grid-cols-3 divide-x divide-slate-200 dark:divide-slate-700">
-            <div className="p-6 bg-slate-50 dark:bg-slate-700/50 flex items-center">
-              <span className="font-medium text-slate-900 dark:text-white">
-                Memory Usage
-              </span>
-            </div>
-            <div className="p-6 bg-red-50 dark:bg-red-900/20 flex items-center justify-center">
-              <XCircle className="w-5 h-5 text-red-500 mr-2" />
-              <span className="text-red-600 dark:text-red-400 font-medium">
-                500MB+
-              </span>
-            </div>
-            <div className="p-6 bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
-              <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-              <span className="text-green-600 dark:text-green-400 font-medium">
-                50MB
-              </span>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 divide-x divide-slate-200 dark:divide-slate-700">
-            <div className="p-6 bg-slate-50 dark:bg-slate-700/50 flex items-center">
-              <span className="font-medium text-slate-900 dark:text-white">
-                Startup Time
-              </span>
-            </div>
-            <div className="p-6 bg-red-50 dark:bg-red-900/20 flex items-center justify-center">
-              <XCircle className="w-5 h-5 text-red-500 mr-2" />
-              <span className="text-red-600 dark:text-red-400 font-medium">
-                15+ seconds
-              </span>
-            </div>
-            <div className="p-6 bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
-              <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-              <span className="text-green-600 dark:text-green-400 font-medium">
-                2 seconds
-              </span>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 divide-x divide-slate-200 dark:divide-slate-700">
-            <div className="p-6 bg-slate-50 dark:bg-slate-700/50 flex items-center">
-              <span className="font-medium text-slate-900 dark:text-white">
-                License Cost
-              </span>
-            </div>
-            <div className="p-6 bg-red-50 dark:bg-red-900/20 flex items-center justify-center">
-              <XCircle className="w-5 h-5 text-red-500 mr-2" />
-              <span className="text-red-600 dark:text-red-400 font-medium">
-                $84/year
-              </span>
-            </div>
-            <div className="p-6 bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
-              <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-              <span className="text-green-600 dark:text-green-400 font-medium">
-                Free
-              </span>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 divide-x divide-slate-200 dark:divide-slate-700">
-            <div className="p-6 bg-slate-50 dark:bg-slate-700/50 flex items-center">
-              <span className="font-medium text-slate-900 dark:text-white">
-                Open Source
-              </span>
-            </div>
-            <div className="p-6 bg-red-50 dark:bg-red-900/20 flex items-center justify-center">
-              <XCircle className="w-5 h-5 text-red-500 mr-2" />
-              <span className="text-red-600 dark:text-red-400 font-medium">
-                No
-              </span>
-            </div>
-            <div className="p-6 bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
-              <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-              <span className="text-green-600 dark:text-green-400 font-medium">
-                Yes
-              </span>
             </div>
           </div>
         </div>

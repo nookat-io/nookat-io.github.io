@@ -3,8 +3,63 @@
 import { MessageCircle, Users, Star, Download, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useState, useEffect } from "react";
+import {
+  getRepoStars,
+  getContributorsCount,
+  getDownloadsCount,
+  formatStarCount,
+  formatCount,
+} from "@/lib/github";
 
 export function Community() {
+  const [starCount, setStarCount] = useState<number>(0);
+  const [contributorsCount, setContributorsCount] = useState<number>(0);
+  const [downloadsCount, setDownloadsCount] = useState<number>(0);
+  const [isLoadingStars, setIsLoadingStars] = useState(true);
+  const [isLoadingContributors, setIsLoadingContributors] = useState(true);
+  const [isLoadingDownloads, setIsLoadingDownloads] = useState(true);
+
+  useEffect(() => {
+    // Fetch all GitHub metrics
+    const fetchMetrics = async () => {
+      // Fetch star count
+      try {
+        const stars = await getRepoStars("nookat-io", "nookat");
+        setStarCount(stars);
+      } catch (error) {
+        console.error("Failed to fetch star count:", error);
+        setStarCount(1200);
+      } finally {
+        setIsLoadingStars(false);
+      }
+
+      // Fetch contributors count
+      try {
+        const contributors = await getContributorsCount("nookat-io", "nookat");
+        setContributorsCount(contributors);
+      } catch (error) {
+        console.error("Failed to fetch contributors count:", error);
+        setContributorsCount(200);
+      } finally {
+        setIsLoadingContributors(false);
+      }
+
+      // Fetch downloads count
+      try {
+        const downloads = await getDownloadsCount("nookat-io", "nookat");
+        setDownloadsCount(downloads);
+      } catch (error) {
+        console.error("Failed to fetch downloads count:", error);
+        setDownloadsCount(50000);
+      } finally {
+        setIsLoadingDownloads(false);
+      }
+    };
+
+    fetchMetrics();
+  }, []);
+
   return (
     <section className="section-padding bg-white dark:bg-slate-800/30">
       <div className="container-base max-w-6xl">
@@ -30,7 +85,11 @@ export function Community() {
                 <Star className="w-6 h-6 text-blue-600" />
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-                1.2k+
+                {isLoadingStars ? (
+                  <span className="animate-pulse">...</span>
+                ) : (
+                  formatStarCount(starCount)
+                )}
               </div>
               <div className="text-slate-600 dark:text-slate-400 text-sm">
                 GitHub Stars
@@ -44,7 +103,11 @@ export function Community() {
                 <Download className="w-6 h-6 text-green-600" />
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-                50k+
+                {isLoadingDownloads ? (
+                  <span className="animate-pulse">...</span>
+                ) : (
+                  formatCount(downloadsCount)
+                )}
               </div>
               <div className="text-slate-600 dark:text-slate-400 text-sm">
                 Downloads
@@ -58,7 +121,11 @@ export function Community() {
                 <Users className="w-6 h-6 text-purple-600" />
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-                200+
+                {isLoadingContributors ? (
+                  <span className="animate-pulse">...</span>
+                ) : (
+                  formatCount(contributorsCount)
+                )}
               </div>
               <div className="text-slate-600 dark:text-slate-400 text-sm">
                 Contributors
@@ -170,7 +237,7 @@ export function Community() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                className="btn-primary text-lg px-8 py-4 h-14"
+                className="btn-primary text-lg px-8 py-4 h-14 text-white"
                 onClick={() =>
                   window.open(
                     "https://github.com/nookat-io/nookat/releases/",
@@ -179,7 +246,7 @@ export function Community() {
                 }
               >
                 <Download className="w-5 h-5 mr-2" />
-                Download Nookat Free
+                Download Nookat
               </Button>
               <Button
                 className="btn-secondary text-lg px-8 py-4 h-14"
