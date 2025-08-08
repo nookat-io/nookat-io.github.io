@@ -1,10 +1,10 @@
-import { Header } from "@/components/Header"
-import { Hero } from "@/components/Hero"
-import { Features } from "@/components/Features"
-import { WhyNookat } from "@/components/WhyNookat"
-import { Screenshots } from "@/components/Screenshots"
-import { DownloadSection } from "@/components/Download"
-import { Footer } from "@/components/Footer"
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { Features } from "@/components/Features";
+import { WhyNookat } from "@/components/WhyNookat";
+import { Screenshots } from "@/components/Screenshots";
+import { Community } from "@/components/Community";
+import { Footer } from "@/components/Footer";
 
 export default function NookatLanding() {
   return (
@@ -14,8 +14,8 @@ export default function NookatLanding() {
       <Features />
       <WhyNookat />
       <Screenshots />
-      <DownloadSection />
+      <Community />
       <Footer />
     </div>
-  )
+  );
 }
