@@ -15,13 +15,6 @@ export function Header() {
         </div>
 
         <nav className="hidden md:flex items-center gap-4">
-          <a
-            href="#download"
-            className="text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors font-medium"
-          >
-            Download
-          </a>
-
           <ThemeToggle />
 
           <a
