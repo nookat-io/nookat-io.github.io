@@ -83,7 +83,7 @@ export function Carousel() {
   return (
     <div className="relative group">
       {/* Screenshot Container */}
-      <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <div className="relative overflow-hidden">
         <div className="p-4 md:p-6">
           <img
             src={screenshotSrc}
