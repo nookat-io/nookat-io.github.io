@@ -5,24 +5,15 @@ import { Download, Zap, Shield, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BackgroundEffects } from "./BackgroundEffects";
-import {
-  getRepoStars,
-  getContributorsCount,
-  getDownloadsCount,
-  formatStarCount,
-  formatCount,
-} from "@/lib/github";
+import { useGitHubMetrics, formatStarCount, formatCount } from "@/lib/github";
 
 export function Hero() {
   const [userOS, setUserOS] = useState<string>("");
   const [otherOS, setOtherOS] = useState<string>("");
   const [mounted, setMounted] = useState(false);
-  const [starCount, setStarCount] = useState<number>(0);
-  const [contributorsCount, setContributorsCount] = useState<number>(0);
-  const [downloadsCount, setDownloadsCount] = useState<number>(0);
-  const [isLoadingStars, setIsLoadingStars] = useState(true);
-  const [isLoadingContributors, setIsLoadingContributors] = useState(true);
-  const [isLoadingDownloads, setIsLoadingDownloads] = useState(true);
+
+  // Use the centralized GitHub metrics hook
+  const { metrics, isLoading, error } = useGitHubMetrics();
 
   useEffect(() => {
     setMounted(true);
@@ -47,44 +38,6 @@ export function Hero() {
     };
 
     detectOS();
-
-    // Fetch GitHub metrics
-    const fetchMetrics = async () => {
-      // Fetch star count
-      try {
-        const stars = await getRepoStars("nookat-io", "nookat");
-        setStarCount(stars);
-      } catch (error) {
-        console.error("Failed to fetch star count:", error);
-        setStarCount(1200);
-      } finally {
-        setIsLoadingStars(false);
-      }
-
-      // Fetch contributors count
-      try {
-        const contributors = await getContributorsCount("nookat-io", "nookat");
-        setContributorsCount(contributors);
-      } catch (error) {
-        console.error("Failed to fetch contributors count:", error);
-        setContributorsCount(200);
-      } finally {
-        setIsLoadingContributors(false);
-      }
-
-      // Fetch downloads count
-      try {
-        const downloads = await getDownloadsCount("nookat-io", "nookat");
-        setDownloadsCount(downloads);
-      } catch (error) {
-        console.error("Failed to fetch downloads count:", error);
-        setDownloadsCount(50000);
-      } finally {
-        setIsLoadingDownloads(false);
-      }
-    };
-
-    fetchMetrics();
   }, []);
 
   const getDownloadUrl = (os: string) => {
@@ -218,33 +171,40 @@ export function Hero() {
           <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
             Trusted by developers worldwide
           </p>
+          {error && (
+            <div className="text-center mb-4">
+              <p className="text-sm text-red-500 dark:text-red-400">
+                Unable to load metrics: {error}
+              </p>
+            </div>
+          )}
           <div className="flex justify-center items-center gap-8 text-slate-400 dark:text-slate-500">
             <div className="text-center">
               <div className="text-2xl font-bold text-slate-900 dark:text-white">
-                {isLoadingStars ? (
+                {isLoading ? (
                   <span className="animate-pulse">...</span>
                 ) : (
-                  formatStarCount(starCount)
+                  formatStarCount(metrics?.stars || 0)
                 )}
               </div>
               <div className="text-xs">GitHub Stars</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-slate-900 dark:text-white">
-                {isLoadingContributors ? (
+                {isLoading ? (
                   <span className="animate-pulse">...</span>
                 ) : (
-                  formatCount(contributorsCount)
+                  formatCount(metrics?.contributors || 0)
                 )}
               </div>
               <div className="text-xs">Contributors</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-slate-900 dark:text-white">
-                {isLoadingDownloads ? (
+                {isLoading ? (
                   <span className="animate-pulse">...</span>
                 ) : (
-                  formatCount(downloadsCount)
+                  formatCount(metrics?.downloads || 0)
                 )}
               </div>
               <div className="text-xs">Downloads</div>

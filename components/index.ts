@@ -1,11 +1,11 @@
+export { BackgroundEffects } from "./BackgroundEffects";
+export { Carousel } from "./Carousel";
+export { Community } from "./Community";
+export { Features } from "./Features";
+export { Footer } from "./Footer";
 export { Header } from "./Header";
 export { Hero } from "./Hero";
-export { Features } from "./Features";
-export { WhyNookat } from "./WhyNookat";
 export { Screenshots } from "./Screenshots";
-export { Community } from "./Community";
-export { Footer } from "./Footer";
-export { BackgroundEffects } from "./BackgroundEffects";
-export { ThemeProvider, useTheme } from "./ThemeProvider";
+export { ThemeProvider } from "./ThemeProvider";
 export { ThemeToggle } from "./ThemeToggle";
-export { Carousel } from "./Carousel";
+export { WhyNookat } from "./WhyNookat";
