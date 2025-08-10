@@ -1,3 +1,5 @@
+import { useState, useEffect, useCallback } from "react";
+
 export interface GitHubRepo {
   name: string;
   full_name: string;
@@ -24,47 +26,72 @@ export interface GitHubRelease {
   }>;
 }
 
-export async function getGitHubRepo(
-  owner: string,
-  repo: string,
-): Promise<GitHubRepo> {
-  const response = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}`,
-    {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-        // Add your GitHub token here if you need higher rate limits
-        // 'Authorization': `token ${process.env.GITHUB_TOKEN}`
-      },
-    },
-  );
+export interface GitHubMetrics {
+  stars: number;
+  contributors: number;
+  downloads: number;
+}
+
+export interface GitHubMetricsState {
+  metrics: GitHubMetrics;
+  isLoading: boolean;
+  error: string | null;
+  lastUpdated: number | null;
+}
+
+// Cache configuration
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+let metricsCache: GitHubMetrics | null = null;
+let cacheTimestamp: number | null = null;
+
+// Base GitHub API configuration
+const GITHUB_CONFIG = {
+  owner: "nookat-io",
+  repo: "nookat",
+  baseUrl: "https://api.github.com",
+  headers: {
+    Accept: "application/vnd.github.v3+json",
+  },
+};
+
+// Generic GitHub API request function
+async function makeGitHubRequest<T>(endpoint: string): Promise<T> {
+  const response = await fetch(`${GITHUB_CONFIG.baseUrl}${endpoint}`, {
+    headers: GITHUB_CONFIG.headers,
+  });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch repo: ${response.statusText}`);
+    throw new Error(
+      `GitHub API error: ${response.status} ${response.statusText}`,
+    );
   }
 
   return response.json();
 }
 
+export async function getGitHubRepo(
+  owner: string = GITHUB_CONFIG.owner,
+  repo: string = GITHUB_CONFIG.repo,
+): Promise<GitHubRepo> {
+  return makeGitHubRequest<GitHubRepo>(`/repos/${owner}/${repo}`);
+}
+
 export async function getRepoStars(
-  owner: string,
-  repo: string,
+  owner: string = GITHUB_CONFIG.owner,
+  repo: string = GITHUB_CONFIG.repo,
 ): Promise<number> {
   const repoData = await getGitHubRepo(owner, repo);
-  console.log(repoData);
   return repoData.stargazers_count;
 }
 
 export async function getContributorsCount(
-  owner: string,
-  repo: string,
+  owner: string = GITHUB_CONFIG.owner,
+  repo: string = GITHUB_CONFIG.repo,
 ): Promise<number> {
   const response = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1&anon=1`,
+    `${GITHUB_CONFIG.baseUrl}/repos/${owner}/${repo}/contributors?per_page=1&anon=1`,
     {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-      },
+      headers: GITHUB_CONFIG.headers,
     },
   );
 
@@ -72,43 +99,17 @@ export async function getContributorsCount(
     throw new Error(`Failed to fetch contributors: ${response.statusText}`);
   }
 
-  // Get the total count from the Link header
-  const linkHeader = response.headers.get("link");
-  if (linkHeader) {
-    const lastLink = linkHeader
-      .split(",")
-      .find((link) => link.includes('rel="last"'));
-    if (lastLink) {
-      const pageMatch = lastLink.match(/page=(\d+)/);
-      if (pageMatch) {
-        return parseInt(pageMatch[1]) * 30; // GitHub shows 30 contributors per page
-      }
-    }
-  }
-
-  // Fallback: count the contributors we can get
   const contributors = await response.json();
   return contributors.length;
 }
 
 export async function getDownloadsCount(
-  owner: string,
-  repo: string,
+  owner: string = GITHUB_CONFIG.owner,
+  repo: string = GITHUB_CONFIG.repo,
 ): Promise<number> {
-  const response = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/releases`,
-    {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-      },
-    },
+  const releases = await makeGitHubRequest<GitHubRelease[]>(
+    `/repos/${owner}/${repo}/releases`,
   );
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch releases: ${response.statusText}`);
-  }
-
-  const releases: GitHubRelease[] = await response.json();
 
   // Sum up all download counts from all assets in all releases
   let totalDownloads = 0;
@@ -121,8 +122,81 @@ export async function getDownloadsCount(
   return totalDownloads;
 }
 
+// Centralized function to fetch all metrics at once
+export async function getAllGitHubMetrics(
+  owner: string = GITHUB_CONFIG.owner,
+  repo: string = GITHUB_CONFIG.repo,
+): Promise<GitHubMetrics> {
+  // Check cache first
+  if (
+    metricsCache &&
+    cacheTimestamp &&
+    Date.now() - cacheTimestamp < CACHE_DURATION
+  ) {
+    return metricsCache;
+  }
+
+  try {
+    // Fetch all metrics in parallel for better performance
+    const [stars, contributors, downloads] = await Promise.all([
+      getRepoStars(owner, repo),
+      getContributorsCount(owner, repo),
+      getDownloadsCount(owner, repo),
+    ]);
+
+    const metrics: GitHubMetrics = {
+      stars,
+      contributors,
+      downloads,
+    };
+
+    // Update cache
+    metricsCache = metrics;
+    cacheTimestamp = Date.now();
+
+    return metrics;
+  } catch (error) {
+    console.error("Failed to fetch GitHub metrics:", error);
+
+    // Return cached data if available, even if expired
+    if (metricsCache) {
+      console.warn("Using cached GitHub metrics due to API error");
+      return metricsCache;
+    }
+
+    throw error;
+  }
+}
+
+// Function to clear cache (useful for testing or manual refresh)
+export function clearGitHubMetricsCache(): void {
+  metricsCache = null;
+  cacheTimestamp = null;
+}
+
+// Function to get cache status
+export function getGitHubMetricsCacheStatus(): {
+  hasCache: boolean;
+  isExpired: boolean;
+  age: number | null;
+} {
+  if (!metricsCache || !cacheTimestamp) {
+    return { hasCache: false, isExpired: true, age: null };
+  }
+
+  const age = Date.now() - cacheTimestamp;
+  const isExpired = age >= CACHE_DURATION;
+
+  return {
+    hasCache: true,
+    isExpired,
+    age,
+  };
+}
+
 // Helper function to format star count
 export function formatStarCount(count: number): string {
+  if (count < 0) return "N/A";
   if (count >= 1000) {
     return `${(count / 1000).toFixed(1)}k+`;
   }
@@ -131,6 +205,7 @@ export function formatStarCount(count: number): string {
 
 // Helper function to format any count
 export function formatCount(count: number): string {
+  if (count < 0) return "N/A";
   if (count >= 1000000) {
     return `${(count / 1000000).toFixed(1)}M+`;
   }
@@ -138,4 +213,56 @@ export function formatCount(count: number): string {
     return `${(count / 1000).toFixed(1)}k+`;
   }
   return count.toString();
+}
+
+// React hook for managing GitHub metrics state
+export function useGitHubMetrics(
+  owner: string = GITHUB_CONFIG.owner,
+  repo: string = GITHUB_CONFIG.repo,
+  autoFetch: boolean = true,
+) {
+  const [state, setState] = useState<GitHubMetricsState>({
+    metrics: { stars: 0, contributors: 0, downloads: 0 },
+    isLoading: false,
+    error: null,
+    lastUpdated: null,
+  });
+
+  const fetchMetrics = useCallback(async () => {
+    setState((prev) => ({ ...prev, isLoading: true, error: null }));
+
+    try {
+      const metrics = await getAllGitHubMetrics(owner, repo);
+      setState({
+        metrics,
+        isLoading: false,
+        error: null,
+        lastUpdated: Date.now(),
+      });
+    } catch (error) {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+        error:
+          error instanceof Error ? error.message : "Failed to fetch metrics",
+      }));
+    }
+  }, [owner, repo]);
+
+  const refreshMetrics = useCallback(() => {
+    clearGitHubMetricsCache();
+    fetchMetrics();
+  }, [fetchMetrics]);
+
+  useEffect(() => {
+    if (autoFetch) {
+      fetchMetrics();
+    }
+  }, [fetchMetrics, autoFetch]);
+
+  return {
+    ...state,
+    fetchMetrics,
+    refreshMetrics,
+  };
 }

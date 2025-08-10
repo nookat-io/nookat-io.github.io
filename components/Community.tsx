@@ -3,62 +3,11 @@
 import { MessageCircle, Users, Star, Download, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState, useEffect } from "react";
-import {
-  getRepoStars,
-  getContributorsCount,
-  getDownloadsCount,
-  formatStarCount,
-  formatCount,
-} from "@/lib/github";
+import { useGitHubMetrics, formatStarCount, formatCount } from "@/lib/github";
 
 export function Community() {
-  const [starCount, setStarCount] = useState<number>(0);
-  const [contributorsCount, setContributorsCount] = useState<number>(0);
-  const [downloadsCount, setDownloadsCount] = useState<number>(0);
-  const [isLoadingStars, setIsLoadingStars] = useState(true);
-  const [isLoadingContributors, setIsLoadingContributors] = useState(true);
-  const [isLoadingDownloads, setIsLoadingDownloads] = useState(true);
-
-  useEffect(() => {
-    // Fetch all GitHub metrics
-    const fetchMetrics = async () => {
-      // Fetch star count
-      try {
-        const stars = await getRepoStars("nookat-io", "nookat");
-        setStarCount(stars);
-      } catch (error) {
-        console.error("Failed to fetch star count:", error);
-        setStarCount(1200);
-      } finally {
-        setIsLoadingStars(false);
-      }
-
-      // Fetch contributors count
-      try {
-        const contributors = await getContributorsCount("nookat-io", "nookat");
-        setContributorsCount(contributors);
-      } catch (error) {
-        console.error("Failed to fetch contributors count:", error);
-        setContributorsCount(200);
-      } finally {
-        setIsLoadingContributors(false);
-      }
-
-      // Fetch downloads count
-      try {
-        const downloads = await getDownloadsCount("nookat-io", "nookat");
-        setDownloadsCount(downloads);
-      } catch (error) {
-        console.error("Failed to fetch downloads count:", error);
-        setDownloadsCount(50000);
-      } finally {
-        setIsLoadingDownloads(false);
-      }
-    };
-
-    fetchMetrics();
-  }, []);
+  // Use the centralized GitHub metrics hook
+  const { metrics, isLoading, error } = useGitHubMetrics();
 
   return (
     <section className="section-padding bg-white dark:bg-slate-800/30">
@@ -79,16 +28,23 @@ export function Community() {
 
         {/* Stats Grid */}
         <div className="grid md:grid-cols-4 gap-6 mb-16">
+          {error && (
+            <div className="col-span-full text-center mb-4">
+              <p className="text-sm text-red-500 dark:text-red-400">
+                Unable to load metrics: {error}
+              </p>
+            </div>
+          )}
           <Card className="card-base text-center">
             <CardContent className="p-6">
               <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <Star className="w-6 h-6 text-blue-600" />
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-                {isLoadingStars ? (
+                {isLoading ? (
                   <span className="animate-pulse">...</span>
                 ) : (
-                  formatStarCount(starCount)
+                  formatStarCount(metrics?.stars || 0)
                 )}
               </div>
               <div className="text-slate-600 dark:text-slate-400 text-sm">
@@ -103,10 +59,10 @@ export function Community() {
                 <Download className="w-6 h-6 text-green-600" />
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-                {isLoadingDownloads ? (
+                {isLoading ? (
                   <span className="animate-pulse">...</span>
                 ) : (
-                  formatCount(downloadsCount)
+                  formatCount(metrics?.downloads || 0)
                 )}
               </div>
               <div className="text-slate-600 dark:text-slate-400 text-sm">
@@ -121,10 +77,10 @@ export function Community() {
                 <Users className="w-6 h-6 text-purple-600" />
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-                {isLoadingContributors ? (
+                {isLoading ? (
                   <span className="animate-pulse">...</span>
                 ) : (
-                  formatCount(contributorsCount)
+                  formatCount(metrics?.contributors || 0)
                 )}
               </div>
               <div className="text-slate-600 dark:text-slate-400 text-sm">

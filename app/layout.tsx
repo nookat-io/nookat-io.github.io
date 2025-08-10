@@ -15,7 +15,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
           name="description"
           content="Nookat is a lightweight container management tool build with Tauri, Rust and React"
         />
-        <link rel="icon" type="image/png" href="./favicon.png" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
       <body>
         <ThemeProvider defaultTheme="light" storageKey="nookat-theme">
