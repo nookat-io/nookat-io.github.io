@@ -4,7 +4,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-  base: "./",
+  base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./"),
@@ -13,5 +13,7 @@ export default defineConfig({
   build: {
     target: "esnext",
     outDir: "dist",
+    assetsDir: "assets",
   },
+  publicDir: "public",
 });
