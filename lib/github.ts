@@ -89,7 +89,7 @@ export async function getContributorsCount(
   repo: string = GITHUB_CONFIG.repo,
 ): Promise<number> {
   const response = await fetch(
-    `${GITHUB_CONFIG.baseUrl}/repos/${owner}/${repo}/contributors?per_page=1&anon=1`,
+    `${GITHUB_CONFIG.baseUrl}/repos/${owner}/${repo}/contributors`,
     {
       headers: GITHUB_CONFIG.headers,
     },
