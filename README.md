@@ -1,6 +1,6 @@
 # Nookat.io Landing Page
 
-A modern, responsive landing page for Nookat - a free and open source Docker Desktop alternative. Built with React, TypeScript, and Tailwind CSS.
+Nookat is a lightweight container management tool build with Tauri, Rust and React
 
 ## Features
 
@@ -39,39 +39,6 @@ npm run build:single
 npm run preview
 ```
 
-## Project Structure
-
-```
-├── app/
-│   ├── globals.css      # Global styles and utilities
-│   ├── layout.tsx       # Root layout component with theme provider
-│   └── page.tsx         # Main page component
-├── components/
-│   ├── ui/              # Reusable UI components
-│   │   ├── badge.tsx
-│   │   ├── button.tsx
-│   │   └── card.tsx
-│   ├── BackgroundEffects.tsx
-│   ├── Carousel.tsx
-│   ├── Download.tsx
-│   ├── Features.tsx
-│   ├── Footer.tsx
-│   ├── Header.tsx
-│   ├── Hero.tsx
-│   ├── index.ts         # Component exports
-│   ├── Screenshots.tsx
-│   ├── ThemeProvider.tsx
-│   ├── ThemeToggle.tsx
-│   └── WhyNookat.tsx
-├── lib/
-│   └── utils.ts         # Utility functions
-├── public/              # Static assets
-│   ├── screenshots/     # App screenshots (dark/light themes)
-│   └── favicon.png
-├── vite.config.ts       # Vite configuration
-└── vite.single.config.ts # Single file build configuration
-```
-
 ## Key Dependencies
 
 - `react` & `react-dom` ^19
@@ -97,8 +64,6 @@ The project can be built as a single HTML file using:
 ```bash
 npm run build:single
 ```
-
-This creates a self-contained HTML file that can be deployed anywhere using the `vite-plugin-singlefile` plugin.
 
 ## License
 

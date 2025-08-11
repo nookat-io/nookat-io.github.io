@@ -14,27 +14,27 @@ const screenshots: Screenshot[] = [
   {
     name: "containers",
     title: "Container Management",
-    description: "View and manage your Docker containers with ease",
+    description: "View and manage your containers with ease",
   },
   {
     name: "images",
     title: "Image Management",
-    description: "Browse and manage Docker images efficiently",
+    description: "Browse and manage your images efficiently",
   },
   {
     name: "volumes",
     title: "Volume Management",
-    description: "Manage persistent data with Docker volumes",
+    description: "Manage your persistent data with volumes",
   },
   {
     name: "networks",
     title: "Network Configuration",
-    description: "Configure and monitor Docker networks",
+    description: "Configure and monitor your networks",
   },
   {
     name: "settings",
     title: "Application Settings",
-    description: "Customize Nookat to your preferences",
+    description: "Customize Nookat to your needs",
   },
 ];
 
