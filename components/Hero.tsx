@@ -25,11 +25,11 @@ export function Hero() {
         setUserOS("macOS");
         setOtherOS("Other Systems");
       } else if (userAgent.includes("win")) {
-        setUserOS("Other Systems");
-        setOtherOS("macOS");
+        setUserOS("Windows");
+        setOtherOS("Other Systems");
       } else if (userAgent.includes("linux")) {
         setUserOS("Linux");
-        setOtherOS("macOS");
+        setOtherOS("Other Systems");
       } else {
         // Default fallback
         setUserOS("Other Systems");
