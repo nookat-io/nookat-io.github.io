@@ -29,6 +29,7 @@ export interface GitHubRelease {
 export interface GitHubMetrics {
   stars: number;
   contributors: number;
+  latestTag: string | null;
   downloads: number;
 }
 
@@ -111,6 +112,7 @@ export async function getDownloadsCount(
     `/repos/${owner}/${repo}/releases`,
   );
 
+  console.log(releases);
   // Sum up all download counts from all assets in all releases
   let totalDownloads = 0;
   releases.forEach((release) => {
@@ -120,6 +122,13 @@ export async function getDownloadsCount(
   });
 
   return totalDownloads;
+}
+
+export async function getLatestTag(
+  _owner: string = GITHUB_CONFIG.owner,
+  _repo: string = GITHUB_CONFIG.repo,
+): Promise<string> {
+  return "0.1.3";
 }
 
 // Centralized function to fetch all metrics at once
@@ -138,16 +147,18 @@ export async function getAllGitHubMetrics(
 
   try {
     // Fetch all metrics in parallel for better performance
-    const [stars, contributors, downloads] = await Promise.all([
+    const [stars, contributors, downloads, latestTag] = await Promise.all([
       getRepoStars(owner, repo),
       getContributorsCount(owner, repo),
       getDownloadsCount(owner, repo),
+      getLatestTag(owner, repo),
     ]);
 
     const metrics: GitHubMetrics = {
       stars,
       contributors,
       downloads,
+      latestTag,
     };
 
     // Update cache
@@ -222,7 +233,7 @@ export function useGitHubMetrics(
   autoFetch: boolean = true,
 ) {
   const [state, setState] = useState<GitHubMetricsState>({
-    metrics: { stars: 0, contributors: 0, downloads: 0 },
+    metrics: { stars: 0, contributors: 0, downloads: 0, latestTag: null },
     isLoading: false,
     error: null,
     lastUpdated: null,

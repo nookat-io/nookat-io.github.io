@@ -15,6 +15,8 @@ export function Hero() {
   // Use the centralized GitHub metrics hook
   const { metrics, isLoading, error } = useGitHubMetrics();
 
+  const latestTag = metrics?.latestTag;
+
   useEffect(() => {
     setMounted(true);
     // Detect user's operating system
@@ -23,16 +25,16 @@ export function Hero() {
 
       if (userAgent.includes("mac")) {
         setUserOS("macOS");
-        setOtherOS("Other Systems");
+        setOtherOS("Other Systems and Version");
       } else if (userAgent.includes("win")) {
         setUserOS("Windows");
-        setOtherOS("Other Systems");
+        setOtherOS("Other Systems and version");
       } else if (userAgent.includes("linux")) {
         setUserOS("Linux");
-        setOtherOS("Other Systems");
+        setOtherOS("Other Systems and version");
       } else {
         // Default fallback
-        setUserOS("Other Systems");
+        setUserOS("Other Systems and version");
         setOtherOS("macOS");
       }
     };
@@ -43,11 +45,11 @@ export function Hero() {
   const getDownloadUrl = (os: string) => {
     switch (os.toLowerCase()) {
       case "macos":
-        return "https://github.com/nookat-io/nookat/releases/";
+        return `https://github.com/nookat-io/nookat/releases/download/v${latestTag}/Nookat_${latestTag}_universal.dmg`;
       case "windows":
-        return "https://github.com/nookat-io/nookat/releases/";
+        return `https://github.com/nookat-io/nookat/releases/download/v${latestTag}/Nookat_${latestTag}_x64-setup.exe`;
       case "linux":
-        return "https://github.com/nookat-io/nookat/releases/";
+        return `https://github.com/nookat-io/nookat/releases/download/v${latestTag}/Nookat_${latestTag}_amd64.AppImage`;
       default:
         return "https://github.com/nookat-io/nookat/releases/";
     }
