@@ -26,6 +26,20 @@ export interface GitHubRelease {
   }>;
 }
 
+// Detailed asset information used for building download menus
+export interface GitHubAsset {
+  name: string;
+  download_count: number;
+  browser_download_url: string;
+}
+
+// Latest release schema (subset we need)
+export interface GitHubLatestRelease {
+  id: number;
+  tag_name: string;
+  assets: GitHubAsset[];
+}
+
 export interface GitHubMetrics {
   stars: number;
   contributors: number;
@@ -129,6 +143,25 @@ export async function getLatestTag(
   _repo: string = GITHUB_CONFIG.repo,
 ): Promise<string> {
   return "0.1.3";
+}
+
+// Fetch latest release with assets for building download options
+export async function getLatestRelease(
+  owner: string = GITHUB_CONFIG.owner,
+  repo: string = GITHUB_CONFIG.repo,
+): Promise<GitHubLatestRelease> {
+  return makeGitHubRequest<GitHubLatestRelease>(
+    `/repos/${owner}/${repo}/releases/latest`,
+  );
+}
+
+// Convenience helper to get latest release assets and tag
+export async function getLatestReleaseAssets(
+  owner: string = GITHUB_CONFIG.owner,
+  repo: string = GITHUB_CONFIG.repo,
+): Promise<{ tag: string; assets: GitHubAsset[] }> {
+  const latest = await getLatestRelease(owner, repo);
+  return { tag: latest.tag_name, assets: latest.assets ?? [] };
 }
 
 // Centralized function to fetch all metrics at once

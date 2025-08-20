@@ -1,14 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Download } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ChevronDown, Download, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGitHubMetrics } from "@/lib/github";
+import { getLatestReleaseAssets } from "@/lib/github";
+
+type SupportedOS = "macOS" | "Windows" | "Linux";
+
+type DownloadOption = {
+  label: string;
+  url: string;
+  os: SupportedOS;
+  format: string;
+  channel: "Stable" | "Debug";
+};
 
 export function DownloadSection() {
   const [userOS, setUserOS] = useState<string>("");
   const [otherOS, setOtherOS] = useState<string>("");
   const [mounted, setMounted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [assets, setAssets] = useState<
+    Array<{
+      name: string;
+      browser_download_url: string;
+      download_count: number;
+    }>
+  >([]);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   // Use the centralized GitHub metrics hook
   const { metrics } = useGitHubMetrics();
@@ -23,13 +43,13 @@ export function DownloadSection() {
 
       if (userAgent.includes("mac")) {
         setUserOS("macOS");
-        setOtherOS("Other Systems and Version");
+        setOtherOS("Other Systems or Versions");
       } else if (userAgent.includes("win")) {
         setUserOS("Windows");
-        setOtherOS("Other Systems and version");
+        setOtherOS("Other Systems or Versions");
       } else if (userAgent.includes("linux")) {
         setUserOS("Linux");
-        setOtherOS("Other Systems and version");
+        setOtherOS("Other Systems or Versions");
       } else {
         // Default fallback
         setUserOS("Other Systems and version");
@@ -38,7 +58,31 @@ export function DownloadSection() {
     };
 
     detectOS();
+
+    getLatestReleaseAssets()
+      .then(({ assets }) => {
+        setAssets(
+          (assets || []).map((a) => ({
+            name: a.name,
+            browser_download_url: a.browser_download_url,
+            download_count: a.download_count,
+          })),
+        );
+      })
+      .catch(() => {
+        // Ignore; fallback URLs will still work
+      });
   }, []);
+
+  useEffect(() => {
+    const onDocClick = (e: MouseEvent) => {
+      if (!menuRef.current) return;
+      if (menuRef.current.contains(e.target as Node)) return;
+      setMenuOpen(false);
+    };
+    if (menuOpen) document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [menuOpen]);
 
   const getDownloadUrl = (os: string) => {
     switch (os.toLowerCase()) {
@@ -56,21 +100,7 @@ export function DownloadSection() {
   const handleDownload = (os: string) => {
     if (!mounted) return;
     const url = getDownloadUrl(os);
-    if (
-      os.toLowerCase() === "windows" ||
-      os.toLowerCase() === "other systems"
-    ) {
-      // Open GitHub releases page for Windows and other systems
-      window.open(url, "_blank");
-    } else {
-      // Download the file directly for macOS and Linux
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+    window.open(url, "_blank");
   };
 
   const handleOtherDownload = () => {
@@ -84,17 +114,141 @@ export function DownloadSection() {
     window.open("https://github.com/nookat-io/nookat", "_blank");
   };
 
+  const inferOSFromName = (name: string): SupportedOS | null => {
+    const lower = name.toLowerCase();
+    if (
+      lower.endsWith(".dmg") ||
+      lower.includes("mac") ||
+      lower.includes("darwin")
+    )
+      return "macOS";
+    if (
+      lower.endsWith(".exe") ||
+      lower.endsWith(".msi") ||
+      lower.includes("win")
+    )
+      return "Windows";
+    if (
+      lower.endsWith(".appimage") ||
+      lower.endsWith(".deb") ||
+      lower.endsWith(".rpm") ||
+      lower.includes("linux")
+    )
+      return "Linux";
+    return null;
+  };
+
+  const inferFormatFromName = (name: string): string => {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".dmg")) return "dmg";
+    if (lower.endsWith(".exe")) return "exe";
+    if (lower.endsWith(".msi")) return "msi";
+    if (lower.endsWith(".appimage")) return "appimage";
+    if (lower.endsWith(".deb")) return "deb";
+    if (lower.endsWith(".rpm")) return "rpm";
+    if (lower.endsWith(".zip")) return "zip";
+    return "file";
+  };
+
+  const inferChannelFromName = (name: string): "Stable" | "Debug" => {
+    return name.toLowerCase().includes("debug") ? "Debug" : "Stable";
+  };
+
+  const allOptions: DownloadOption[] = useMemo(() => {
+    return assets
+      .map((a) => {
+        const os = inferOSFromName(a.name);
+        if (!os) return null;
+        return {
+          label: `${inferChannelFromName(a.name)} ${inferFormatFromName(a.name).toUpperCase()}`,
+          url: a.browser_download_url,
+          os,
+          format: inferFormatFromName(a.name),
+          channel: inferChannelFromName(a.name),
+        } as DownloadOption;
+      })
+      .filter(Boolean) as DownloadOption[];
+  }, [assets]);
+
+  const sortOptions = (opts: DownloadOption[]): DownloadOption[] => {
+    const formatOrder: Record<SupportedOS, string[]> = {
+      macOS: ["dmg", "zip"],
+      Windows: ["exe", "msi"],
+      Linux: ["appimage", "deb", "rpm", "zip"],
+    };
+    return [...opts].sort((a, b) => {
+      if (a.channel !== b.channel) return a.channel === "Stable" ? -1 : 1;
+      const order = formatOrder[a.os] || [];
+      const aIndex = order.indexOf(a.format);
+      const bIndex = order.indexOf(b.format);
+      return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+    });
+  };
+
+  const optionsForUserOS = useMemo(() => {
+    if (userOS !== "macOS" && userOS !== "Windows" && userOS !== "Linux")
+      return [] as DownloadOption[];
+    const filtered = allOptions.filter((o) => o.os === userOS);
+    return sortOptions(filtered);
+  }, [allOptions, userOS]);
+
   return (
     <>
       {/* Primary CTAs */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-        <Button
-          className="btn-primary text-lg px-8 py-4 h-14 text-white"
-          onClick={() => handleDownload(userOS)}
-        >
-          <Download className="w-5 h-5 mr-2" />
-          Download for {userOS}
-        </Button>
+        <div className="relative inline-flex" ref={menuRef}>
+          <Button
+            className="btn-primary text-lg px-8 py-4 h-14 text-white pr-6"
+            onClick={() => {
+              if (optionsForUserOS.length === 0) {
+                handleDownload(userOS);
+                return;
+              }
+              setMenuOpen((v) => !v);
+            }}
+          >
+            <Download className="w-5 h-5 mr-2" />
+            Download for {userOS}
+            {optionsForUserOS.length > 0 && (
+              <ChevronDown className="w-4 h-4 ml-2 opacity-80" />
+            )}
+          </Button>
+
+          {menuOpen && optionsForUserOS.length > 0 && (
+            <div
+              className="absolute left-0 top-full mt-2 w-64 rounded-lg border border-slate-200 bg-white shadow-lg dark:border-slate-700 dark:bg-slate-900 z-50"
+              role="menu"
+            >
+              <div className="py-2">
+                {optionsForUserOS.map((opt, idx) => (
+                  <button
+                    key={`${opt.label}-${idx}`}
+                    className="w-full px-3 py-2 text-left text-sm hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
+                    onClick={() => {
+                      window.open(opt.url, "_blank");
+                      setMenuOpen(false);
+                    }}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+              <div className="border-t border-slate-200 dark:border-slate-700" />
+              <button
+                className="w-full px-3 py-2 text-left text-sm hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 inline-flex items-center gap-2"
+                onClick={() => {
+                  window.open(
+                    "https://github.com/nookat-io/nookat/releases/",
+                    "_blank",
+                  );
+                  setMenuOpen(false);
+                }}
+              >
+                <ExternalLink className="w-4 h-4" /> View all releases
+              </button>
+            </div>
+          )}
+        </div>
         <Button
           className="btn-secondary text-lg px-8 py-4 h-14"
           onClick={handleGitHubClick}
