@@ -1,6 +1,7 @@
 export { BackgroundEffects } from "./BackgroundEffects";
 export { Carousel } from "./Carousel";
 export { Community } from "./Community";
+export { DownloadSection } from "./DownloadSection";
 export { Features } from "./Features";
 export { Footer } from "./Footer";
 export { Header } from "./Header";
