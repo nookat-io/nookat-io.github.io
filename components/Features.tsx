@@ -19,7 +19,7 @@ export function Features() {
           <p className="text-slate-700 dark:text-slate-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
             All the essential container features you use daily, wrapped in a
             lightning-fast native interface. No unnecessary features, no
-            resource hogging, just pure container management.
+            resource hogging, just pure container management
           </p>
         </div>
 
