@@ -23,7 +23,7 @@ export function Community() {
           </h2>
           <p className="text-slate-700 dark:text-slate-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
             Be part of the future of container management. Contribute, discuss,
-            and help shape the development of Nookat.
+            and help shape the development of Nookat
           </p>
         </div>
 
@@ -128,7 +128,7 @@ export function Community() {
               </h3>
               <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
                 Help improve Nookat by contributing code, reporting bugs, or
-                suggesting new features. Every contribution makes a difference.
+                suggesting new features. Every contribution makes a difference
               </p>
               <Button
                 className="btn-primary w-full"
@@ -162,9 +162,9 @@ export function Community() {
                 Join Discussions
               </h3>
               <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-                Connect with other developers, share your experiences, and get
+                Connect with other developers, share your experience, and get
                 help from the community. Your feedback shapes the future of
-                Nookat.
+                Nookat
               </p>
               <Button
                 className="btn-secondary w-full"
@@ -186,11 +186,11 @@ export function Community() {
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8 md:p-12">
             <h3 className="text-2xl md:text-3xl font-bold mb-4 text-slate-900 dark:text-white">
-              Ready to Experience the Difference?
+              Interested in trying Nookat?
             </h3>
             <p className="text-slate-600 dark:text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
-              Join thousands of developers who've already switched to Nookat.
-              Download it free and see the performance difference for yourself.
+              Download and explore all features. Give it a try and let us know
+              what you think!
             </p>
             <DownloadSection />
           </div>

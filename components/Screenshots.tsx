@@ -8,11 +8,11 @@ export function Screenshots() {
     <section className="section-padding bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <div className="container-base max-w-7xl">
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+        <div className="text-center mb-20">
+          {/* <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Eye className="w-4 h-4" />
             See Nookat in Action
-          </div>
+          </div> */}
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Clean, Intuitive
             <br />

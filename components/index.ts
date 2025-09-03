@@ -9,4 +9,4 @@ export { Hero } from "./Hero";
 export { Screenshots } from "./Screenshots";
 export { ThemeProvider } from "./ThemeProvider";
 export { ThemeToggle } from "./ThemeToggle";
-export { WhyNookat } from "./WhyNookat";
+export { TechStack } from "./TechStack";

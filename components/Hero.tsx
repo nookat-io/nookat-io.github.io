@@ -1,7 +1,6 @@
 "use client";
 
 import { Zap, Shield, Code } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { BackgroundEffects } from "./BackgroundEffects";
 import { DownloadSection } from "./DownloadSection";
 import { useGitHubMetrics, formatStarCount, formatCount } from "@/lib/github";
@@ -14,13 +13,7 @@ export function Hero() {
     <section className="relative section-padding overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900">
       <BackgroundEffects />
 
-      <div className="container-base text-center max-w-5xl relative z-10 mt-16">
-        {/* Badge */}
-        <Badge className="mb-6 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border-blue-200 dark:border-blue-800 px-4 py-2 text-sm font-medium">
-          <Zap className="w-4 h-4 mr-2" />
-          Open Source & Built with Rust and Tauri
-        </Badge>
-
+      <div className="container-base text-center max-w-5xl relative z-10 mt-20">
         {/* Main Headline */}
         <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-blue-600 to-slate-700 dark:from-white dark:via-blue-100 dark:to-slate-300 bg-clip-text text-transparent leading-tight">
           Container Management

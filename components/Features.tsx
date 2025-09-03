@@ -1,6 +1,5 @@
-import { Container, HardDrive, Network, Settings, Shield } from "lucide-react";
+import { Container, HardDrive, Network, Settings } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 export function Features() {
   return (
@@ -9,11 +8,7 @@ export function Features() {
       className="section-padding bg-white dark:bg-slate-800/30"
     >
       <div className="container-base max-w-6xl">
-        <div className="text-center mb-16">
-          <Badge className="mb-4 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 border-green-200 dark:border-green-800 px-4 py-2 text-sm font-medium">
-            <Shield className="w-4 h-4 mr-2" />
-            Everything You Need, Nothing You Don't
-          </Badge>
+        <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Container Management
             <br />
@@ -105,45 +100,6 @@ export function Features() {
               </p>
             </CardContent>
           </Card>
-        </div>
-
-        {/* Performance Comparison */}
-        <div className="mt-20 bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-800/50 dark:to-blue-900/20 rounded-2xl p-8 md:p-12">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-slate-900 dark:text-white">
-              Performance That Speaks for Itself
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-lg">
-              Built with Rust and Tauri for native performance
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                ~50MB
-              </div>
-              <div className="text-slate-600 dark:text-slate-400">
-                Memory Usage
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
-                &lt; 2s
-              </div>
-              <div className="text-slate-600 dark:text-slate-400">
-                Startup Time
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                $0
-              </div>
-              <div className="text-slate-600 dark:text-slate-400">
-                License Cost
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
