@@ -196,9 +196,9 @@ export function DownloadSection() {
     <>
       {/* Primary CTAs */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-        <div className="relative inline-flex" ref={menuRef}>
+        <div className="relative w-full sm:w-auto" ref={menuRef}>
           <Button
-            className="btn-primary text-lg px-8 py-4 h-14 text-white pr-6"
+            className="btn-primary text-lg px-8 py-4 h-14 text-white pr-6 w-full sm:w-auto"
             onClick={() => {
               if (optionsForUserOS.length === 0) {
                 handleDownload(userOS);
@@ -250,7 +250,7 @@ export function DownloadSection() {
           )}
         </div>
         <Button
-          className="btn-secondary text-lg px-8 py-4 h-14"
+          className="btn-secondary text-lg px-8 py-4 h-14 w-full sm:w-auto"
           onClick={handleGitHubClick}
         >
           <svg

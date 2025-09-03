@@ -3,11 +3,11 @@
 import { Zap, Shield, Code } from "lucide-react";
 import { BackgroundEffects } from "./BackgroundEffects";
 import { DownloadSection } from "./DownloadSection";
-import { useGitHubMetrics, formatStarCount, formatCount } from "@/lib/github";
+// import { useGitHubMetrics, formatStarCount, formatCount } from "@/lib/github";
 
 export function Hero() {
   // Use the centralized GitHub metrics hook
-  const { metrics, isLoading, error } = useGitHubMetrics();
+  // const { metrics, isLoading, error } = useGitHubMetrics();
 
   return (
     <section className="relative section-padding overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900">
@@ -48,7 +48,7 @@ export function Hero() {
         <DownloadSection />
 
         {/* Social Proof */}
-        <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
+        {/* <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
           <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
             Trusted by developers worldwide
           </p>
@@ -91,7 +91,7 @@ export function Hero() {
               <div className="text-xs">Downloads</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

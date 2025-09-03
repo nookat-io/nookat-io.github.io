@@ -29,11 +29,11 @@ export function TechStack() {
         </div>
 
         {/* Architecture Stack Section */}
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-12">
           <div className="space-y-4 p-4">
             {/* Tauri Application Layer */}
             <div className="p-4 rounded-lg border-2 transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400 flex items-center justify-between ring-purple-200 dark:ring-purple-800 shadow-lg">
-              <div className="flex flex-col h-32 justify-center w-full space-y-6">
+              <div className="flex flex-col h-auto sm:h-32 justify-center w-full space-y-4 sm:space-y-6">
                 {/* Top: Nookat app logo and label */}
                 <div className="flex items-center justify-center space-x-3">
                   <TechIcon src="/logo.png" alt="Nookat" className="w-8 h-8" />
@@ -43,7 +43,7 @@ export function TechStack() {
                 </div>
 
                 {/* Bottom: All technology icons including Tauri */}
-                <div className="flex items-center justify-center space-x-3">
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
                   <div className="flex items-center space-x-1 bg-purple-100 dark:bg-purple-900/30 px-3 py-2 rounded-lg">
                     <TechIcon
                       src="/tech-icons/tauri.png"
@@ -100,7 +100,7 @@ export function TechStack() {
 
             {/* Container Runtime Layer */}
             <div className="p-4 rounded-lg border-2 transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg bg-cyan-50 dark:bg-cyan-950/30 text-cyan-600 dark:text-cyan-400 flex items-center justify-between ring-cyan-200 dark:ring-cyan-800 shadow-lg">
-              <div className="flex flex-col h-32 justify-center w-full space-y-6">
+              <div className="flex flex-col h-auto sm:h-32 justify-center w-full space-y-4 sm:space-y-6">
                 {/* Top: Container Runtime title */}
                 <div className="flex items-center justify-center">
                   <span className="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
@@ -109,7 +109,7 @@ export function TechStack() {
                 </div>
 
                 {/* Bottom: Container technology icons */}
-                <div className="flex items-center justify-center space-x-4">
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
                   <div className="flex items-center justify-center px-4 py-3">
                     <TechIcon
                       src="/tech-icons/docker-logo-blue.png"
@@ -137,7 +137,7 @@ export function TechStack() {
 
             {/* Operating System Layer */}
             <div className="p-4 rounded-lg border-2 transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg bg-gray-50 dark:bg-gray-950/30 text-gray-600 dark:text-gray-400 flex items-center justify-between ring-gray-200 dark:ring-gray-800 shadow-lg">
-              <div className="flex flex-col h-32 justify-center w-full space-y-6">
+              <div className="flex flex-col h-auto sm:h-32 justify-center w-full space-y-4 sm:space-y-6">
                 {/* Top: Operating System title */}
                 <div className="flex items-center justify-center">
                   <span className="text-2xl font-bold text-gray-600 dark:text-gray-400">
@@ -146,7 +146,7 @@ export function TechStack() {
                 </div>
 
                 {/* Bottom: Operating System icons */}
-                <div className="flex items-center justify-center space-x-4">
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
                   <div className="flex items-center justify-center px-4 py-3 group relative">
                     <TechIcon
                       src="/tech-icons/windows.png"

@@ -88,7 +88,7 @@ export function Carousel() {
           <img
             src={screenshotSrc}
             alt={`${screenshots[currentIndex].title} - ${screenshots[currentIndex].description}`}
-            className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-contain rounded-xl transition-all duration-500 ease-in-out"
+            className="w-full h-[300px] md:h-[400px] lg:h-[600px] object-contain rounded-xl transition-all duration-500 ease-in-out"
           />
         </div>
 

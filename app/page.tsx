@@ -3,7 +3,7 @@ import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { TechStack } from "@/components/TechStack";
 import { Screenshots } from "@/components/Screenshots";
-import { Community } from "@/components/Community";
+// import { Community } from "@/components/Community";
 import { Footer } from "@/components/Footer";
 
 export default function NookatLanding() {
@@ -14,7 +14,7 @@ export default function NookatLanding() {
       <Features />
       <Screenshots />
       <TechStack />
-      <Community />
+      {/* <Community /> */}
       <Footer />
     </div>
   );

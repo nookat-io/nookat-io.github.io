@@ -8,11 +8,7 @@ export function Screenshots() {
     <section className="section-padding bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <div className="container-base max-w-7xl">
         {/* Header Section */}
-        <div className="text-center mb-20">
-          {/* <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <Eye className="w-4 h-4" />
-            See Nookat in Action
-          </div> */}
+        <div className="text-center mb-2 sm:mb-8">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Clean, Intuitive
             <br />
@@ -23,12 +19,12 @@ export function Screenshots() {
           <p className="text-slate-600 dark:text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
             Experience the difference with our streamlined interface. Every
             feature is designed to make container management effortless and
-            enjoyable.
+            enjoyable
           </p>
         </div>
 
         {/* Screenshot Carousel */}
-        <div className="mb-16">
+        <div className="mb-8 sm:mb-16">
           <div className="flex justify-center">
             <div className="w-full max-w-6xl">
               <Carousel />

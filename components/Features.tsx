@@ -8,7 +8,7 @@ export function Features() {
       className="section-padding bg-white dark:bg-slate-800/30"
     >
       <div className="container-base max-w-6xl">
-        <div className="text-center mb-20">
+        <div className="text-center mb-8 sm:mb-12 md:mb-20">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Container Management
             <br />
@@ -77,7 +77,7 @@ export function Features() {
                   {" "}
                   Debug connections
                 </span>{" "}
-                instantly.
+                instantly
               </p>
             </CardContent>
           </Card>
@@ -96,7 +96,7 @@ export function Features() {
                   {" "}
                   Know what's running
                 </span>{" "}
-                at a glance.
+                at a glance
               </p>
             </CardContent>
           </Card>

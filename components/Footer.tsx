@@ -13,12 +13,8 @@ export function Footer() {
               Nookat
             </span>
           </div>
-          <div className="text-center text-slate-600 dark:text-slate-400 text-sm">
-            © 2025 Nookat. Free and open source container management tool.
-            <br />
-            <span className="text-xs">
-              Built with Rust and Tauri for native performance.
-            </span>
+          <div className="text-center text-slate-600 dark:text-slate-400 text-sm mb-4 md:mb-0">
+            © 2025 Nookat. Free and open source container management tool
           </div>
           <div className="flex items-center gap-6 text-slate-600 dark:text-slate-400">
             <a
