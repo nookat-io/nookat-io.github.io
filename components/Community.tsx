@@ -1,14 +1,15 @@
 "use client";
 
-import { MessageCircle, Users, Star, Download, Code } from "lucide-react";
+// import { MessageCircle, Users, Star, Download, Code } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useGitHubMetrics, formatStarCount, formatCount } from "@/lib/github";
+// import { useGitHubMetrics, formatStarCount, formatCount } from "@/lib/github";
 import { DownloadSection } from "./DownloadSection";
 
 export function Community() {
   // Use the centralized GitHub metrics hook
-  const { metrics, isLoading, error } = useGitHubMetrics();
+  // const { metrics, isLoading, error } = useGitHubMetrics();
 
   return (
     <section className="section-padding bg-white dark:bg-slate-800/30">
@@ -28,7 +29,7 @@ export function Community() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-4 gap-6 mb-16">
+        {/* <div className="grid md:grid-cols-4 gap-6 mb-16">
           {error && (
             <div className="col-span-full text-center mb-4">
               <p className="text-sm text-red-500 dark:text-red-400">
@@ -103,7 +104,7 @@ export function Community() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
 
         {/* Community Actions */}
         <div className="grid md:grid-cols-2 gap-8">
