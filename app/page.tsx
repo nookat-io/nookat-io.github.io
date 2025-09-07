@@ -11,9 +11,9 @@ export default function NookatLanding() {
     <div className="min-h-screen text-slate-900 dark:text-white">
       <Header />
       <Hero />
-      <Features />
       <Screenshots />
       <TechStack />
+      <Features />
       {/* <Community /> */}
       <Footer />
     </div>
