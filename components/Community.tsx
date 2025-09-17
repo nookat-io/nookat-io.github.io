@@ -110,7 +110,7 @@ export function Community() {
         <div className="grid md:grid-cols-2 gap-8">
           <Card className="card-base group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-8">
-              <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
+              <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors mx-auto">
                 <svg
                   className="w-8 h-8 text-blue-600"
                   fill="currentColor"
@@ -156,7 +156,7 @@ export function Community() {
 
           <Card className="card-base group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-8">
-              <div className="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-500/30 transition-colors">
+              <div className="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-500/30 transition-colors mx-auto">
                 <MessageCircle className="w-8 h-8 text-green-600" />
               </div>
               <h3 className="font-bold text-2xl mb-4 text-slate-900 dark:text-white">
