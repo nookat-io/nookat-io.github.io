@@ -139,10 +139,11 @@ export async function getDownloadsCount(
 }
 
 export async function getLatestTag(
-  _owner: string = GITHUB_CONFIG.owner,
-  _repo: string = GITHUB_CONFIG.repo,
+  owner: string = GITHUB_CONFIG.owner,
+  repo: string = GITHUB_CONFIG.repo,
 ): Promise<string> {
-  return "0.1.3";
+  const latest_tag = (await getLatestRelease(owner, repo))?.tag_name;
+  return (latest_tag ?? "").replace(/^v/, "");
 }
 
 // Fetch latest release with assets for building download options
