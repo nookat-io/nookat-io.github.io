@@ -1,0 +1,6 @@
+dist
+.impeccable
+package-lock.json
+scripts/brand/package-lock.json
+public/brand
+public/favicon.svg
